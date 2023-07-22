@@ -24,27 +24,28 @@ You must write an algorithm that runs in O(n) time and without using the divisio
 // Then the result is prefix * suffix.
 
 func productExceptSelf(nums []int) []int {
-	var productPrefix []int = make([]int, len(nums))
-	var productSuffix []int = make([]int, len(nums))
+	var result []int = make([]int, len(nums))
+	var n = len(nums) - 1
 
 	var prefixSoFar int = 1
-	var suffixSoFar int = 1
-	var n = len(nums) - 1
 	for i, _ := range nums {
 		if i == 0 {
-			productPrefix[i] = 1
-			productSuffix[n - i] = 1
+			result[i] = 1
 			continue
 		}
 		prefixSoFar *= nums[i - 1]
-		suffixSoFar *= nums[n - i + 1]
-		productPrefix[i] = prefixSoFar
-		productSuffix[n - i] = suffixSoFar
+		result[i] = prefixSoFar
 	}
 
-	var result []int = make([]int, len(nums))
+	var suffixSoFar int = 1
 	for i, _ := range nums {
-		result[i] = productPrefix[i] * productSuffix[i]
+		if i == 0 {
+			result[n - i] *= 1
+			continue
+		}
+		suffixSoFar *= nums[n - i + 1]
+		result[n - i] *= suffixSoFar
 	}
+
 	return result
 }
