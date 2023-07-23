@@ -22,16 +22,14 @@ func findMin(nums []int) int {
 	maxIndex := len(nums) - 1
 	for maxIndex > minIndex {
 		var i int = (maxIndex + minIndex) / 2
-		// Base cases; are we at the end.
+		// Base case: we are at the end.
 		if nums[minIndex] < nums[maxIndex] {
 			return nums[minIndex]
-		} else if i + 1 < len(nums) - 1 && nums[i] > nums[i + 1] {
-			return nums[i + 1]
 		}
 		// Otherwise our pivot is less than its next neighbor so we need to winnow the array.
 		if nums[i] > nums[maxIndex] {
-			minIndex = i
-		} else if nums[minIndex] > nums[i] {
+			minIndex = i + 1
+		} else { // nums[minIndex] > nums[i]
 			maxIndex = i
 		}
 	}
