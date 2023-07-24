@@ -33,5 +33,6 @@ func findMin(nums []int) int {
 			maxIndex = i
 		}
 	}
+	// Can never get here.
 	return nums[maxIndex]
 }
